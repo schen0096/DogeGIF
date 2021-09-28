@@ -48,4 +48,8 @@ group :test do
   gem 'shoulda-matchers', '~> 4.0'
 end
 
+gem "rest-client"
+
+gem "faker"
+
 gem "active_model_serializers", "~> 0.10.12"
