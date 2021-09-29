@@ -1,27 +1,27 @@
 class DogGifsController < ApplicationController
 
-	# GET /dog_gifs
+	# GET /doggif
 	def index
-		dog_gifs = Dog_Gif.all
-		render json: comments, status: :ok
+		dog_gifs = DogGif.all
+		render json: dog_gifs, status: :ok
 	end
 	
-	# GET /dog_gifs/:id
+	# GET /doggif/:id
 	def show 
 		dog_gif = find_dog_gif
 		render json: dog_gif, status: :ok
 	end
 
-	# POST /dog_gifs/:id
+	# POST /doggif/:id
 	def create
-		dog_gif = Dog_Gif.create!(comment_params)
+		dog_gif = DogGif.create!(dog_gif_params)
 		render json: dog_gif, status: :created
 	end
 
 	private 
 
 	def find_dog_gif 
-		Comment.find(params[:id])
+		DogGif.find(params[:id])
 	end
 
 	def dog_gif_params
