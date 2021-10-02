@@ -1,9 +1,8 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
 import EditForm from './EditForm'
 import { Button } from 'semantic-ui-react'
 
-function CommentDisplay({ comment, user, onDeleteComment, appOnEditComment, dogGifs }) {
+function CommentDisplay({ comment, user, onDeleteComment, appOnEditComment, dogID }) {
 	const [editClicked, setEditClicked] = useState(false)
 	const [errors, setErrors] = useState([])
 	const [renderComment, setRenderComment] = useState(comment)
@@ -33,7 +32,6 @@ function CommentDisplay({ comment, user, onDeleteComment, appOnEditComment, dogG
   const splitDate = parseDate.split(" ")
   const renderDate = `${splitDate[0]}, ${splitDate[1]} ${splitDate[2]}, ${splitDate[3]}`
 
-
 	return (
     <div className='post-div' >
       <main style={{ marginLeft: 80 }} >
@@ -41,7 +39,7 @@ function CommentDisplay({ comment, user, onDeleteComment, appOnEditComment, dogG
           <b>{renderComment.all.user.username}</b>
           renderComment.dog_gif_id === dogGifs.id &&
         </div> */}
-        { renderComment.user_id === user.id ? 
+        { renderComment.dog_gif_id === dogID ? 
                 (<>
                   <p>{renderComment.comment}</p>
                   <div>
@@ -54,7 +52,7 @@ function CommentDisplay({ comment, user, onDeleteComment, appOnEditComment, dogG
       }
       </main>
     <div className='p-container' >
-        {renderComment.user_id === user.id ? (
+        {renderComment && renderComment.user_id === user.id && renderComment.dog_gif_id === dogID ?  (
           <>
             <Button basic color='blue' style={{'marginLeft': 70}}onClick={editButtonClick}>Edit</Button>
             <Button basic color='red' onClick={handleDelete}>Delete</Button>

@@ -1,10 +1,13 @@
 import { useState } from 'react' 
+import { useHistory } from 'react-router'
 import { Form, TextArea, Button } from 'semantic-ui-react'
 
-function NewGifForm({ dogGif, appOnAddDogGif }) {
+function NewGifForm({ appOnAddDogGif }) {
 
     const [img, setImg] = useState("");
     const [tag, setTag] = useState("");
+
+    const history = useHistory()
 
     function handleNewImg(e) {
       e.preventDefault();
@@ -14,6 +17,10 @@ function NewGifForm({ dogGif, appOnAddDogGif }) {
     function handleNewTag(e) {
         e.preventDefault();
         setTag(e.target.value);
+    }
+
+    function returnToHome(){
+        history.push('/dog_gif')
     }
   
     function submitGif(e) {
@@ -33,6 +40,7 @@ function NewGifForm({ dogGif, appOnAddDogGif }) {
         appOnAddDogGif(data)
         setImg('')
         setTag('')
+        returnToHome()
       });
     }
     

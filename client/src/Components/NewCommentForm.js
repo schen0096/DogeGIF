@@ -1,7 +1,7 @@
 import {useState} from 'react'
 import { Form, TextArea, Button } from 'semantic-ui-react'
 
-function NewCommentForm({ user, onAddComment }) {
+function NewCommentForm({ user, onAddComment, dogID }) {
   const [comment, setComment] = useState("");
 
   function handleNewComment(e) {
@@ -9,7 +9,7 @@ function NewCommentForm({ user, onAddComment }) {
     setComment(e.target.value);
   }
 
-  function submitJib(e) {
+  function submitComment(e) {
     e.preventDefault();
     fetch('/comments', {
       method: "POST",
@@ -18,7 +18,8 @@ function NewCommentForm({ user, onAddComment }) {
       },
       body: JSON.stringify({
         comment,
-        user_id: user.id
+        user_id: user.id,
+        dog_gif_id:dogID
       }),
     })
     .then((resp) => resp.json())
@@ -30,7 +31,7 @@ function NewCommentForm({ user, onAddComment }) {
   
   return (
     <>
-      <Form style={{ 'width': '700px' }} onSubmit={submitJib}>
+      <Form style={{ 'width': '700px' }} onSubmit={submitComment}>
         <TextArea 
           placeholder="Add Your Comment!"
           value={comment} 

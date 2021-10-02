@@ -1,15 +1,20 @@
 import { useState, useEffect, Fragment } from "react"
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import LoginContainer from './Components/LoginContainer'
 import DogGifsContainer from './Components/DogGifsContainer'
+import ShowOneDogGif from "./Components/ShowOneDogGif";
 import CommentsContainer from "./Components/CommentsContainer"
 import NewGifForm from './Components/NewGifForm'
 import Navbar from "./Components/Navbar"
 
 function App() {
+
+  const storedValueAsNumber = Number(localStorage.getItem("dogID"))
+
   const [user, setUser] = useState(null)
   const [dogGifs, setDogGifs] = useState([])
   const [comments, setComments] = useState([])
+  const [dogID, setDogID] = useState(Number.isInteger(storedValueAsNumber) ? storedValueAsNumber : 0)
 
   // CHECKS TO SEE IF A USER IS ALREADY LOGGED IN
   useEffect(() => {
@@ -23,6 +28,11 @@ function App() {
       }
     });
   }, []);
+
+
+  useEffect(() => {
+    localStorage.setItem("dogID", String(dogID))
+  }, [dogID])
 
   // FETCHES ALL DOG GIFS
   function fetchingDogGifs(){
@@ -58,7 +68,7 @@ function App() {
   }
 
   function appOnAddDogGif(data) {
-    setDogGifs([data, ...dogGifs])
+    setDogGifs([ ...dogGifs, data ])
   }
 
   function appOnEditComment(data) {
@@ -66,21 +76,26 @@ function App() {
     setComments([data, ...editedCommentArr])
   }
 
+
   return (
     <Fragment>
       <Navbar onLogout={onLogout} user={user} />
       {user && fetchingComments ? (
         // <div className="main-div" >
             <Switch>
-             	<Route exact path ="/">
+              <Route exact path = "/dog_gif/:id">
                 <>
-                  {dogGifs.map((dogGif)=> <DogGifsContainer dogGif={dogGif}/>)}
-                  <CommentsContainer user={user} comments={comments} setComments={setComments} appOnDeleteComment={appOnDeleteComment} appOnAddComment={appOnAddComment} appOnEditComment={appOnEditComment} dogGifs={dogGifs} />
+                  <ShowOneDogGif dogID={dogID} />
+                  <CommentsContainer user={user} comments={comments} setComments={setComments} appOnDeleteComment={appOnDeleteComment} appOnAddComment={appOnAddComment} appOnEditComment={appOnEditComment} dogID={dogID} />
                 </>
+              </Route>
+             	<Route exact path ="/dog_gif">
+                  {dogGifs.map((dogGif)=> <DogGifsContainer key={dogGif.id} dogGif={dogGif} img={dogGif.img} setDogID={setDogID} />)}
  	            </Route>
               <Route exact path ="/new">
                   <NewGifForm appOnAddDogGif={appOnAddDogGif}/>
               </Route>
+
           </Switch>
         // </div>
       ) : (

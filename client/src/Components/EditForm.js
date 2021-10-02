@@ -1,11 +1,11 @@
 import { useState } from 'react'
 
 function EditForm({ comment, updateComment, setEditClicked, appOnEditComment }) {
-  const [content, setContent] = useState(comment.comment);
+  const [newComment, setNewComment] = useState(comment.comment);
 
   function handleEditContent(e) {
     e.preventDefault();
-    setContent(e.target.value);
+    setNewComment(e.target.value);
   }
 
   function submitEdit(e) {
@@ -16,7 +16,7 @@ function EditForm({ comment, updateComment, setEditClicked, appOnEditComment }) 
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        comment,
+        comment: newComment
       }),
     })
       .then((resp) => resp.json())
@@ -34,8 +34,8 @@ function EditForm({ comment, updateComment, setEditClicked, appOnEditComment }) 
           Edit your comment:
           <input
             type="text"
-            name="content"
-            value={content}
+            name="comment"
+            value={newComment}
             onChange={handleEditContent}
           />
         </label>

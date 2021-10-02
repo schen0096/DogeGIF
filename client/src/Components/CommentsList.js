@@ -2,7 +2,7 @@ import { useState } from "react"
 import CommentDisplay from "./CommentDisplay"
 import NewCommentForm from "./NewCommentForm"
 
-function CommentsList({ comments, user, appOnDeleteComment, appOnAddComment, appOnEditComment, otherUser, dogGifs }) {
+function CommentsList({ comments, user, appOnDeleteComment, appOnAddComment, appOnEditComment, otherUser, dogID }) {
 	const [listComments, setListComments] = useState(comments)
 
 	function onAddComment(data) {
@@ -17,7 +17,7 @@ function CommentsList({ comments, user, appOnDeleteComment, appOnAddComment, app
 	}
 
 	const renderComments = listComments.map((comment) => (
-    <CommentDisplay comment={comment} key={comment.id} dogGifs={dogGifs} user={user} onDeleteComment={onDeleteComment} appOnEditComment={appOnEditComment} />
+    <CommentDisplay comment={comment} key={comment.id} dogID={dogID} user={user} onDeleteComment={onDeleteComment} appOnEditComment={appOnEditComment} />
   ));	
 
 	return (
@@ -28,6 +28,7 @@ function CommentsList({ comments, user, appOnDeleteComment, appOnAddComment, app
             <NewCommentForm
               user={user}
               onAddComment={onAddComment}
+			  dogID={dogID}
             />
           	</div>
         </div>
