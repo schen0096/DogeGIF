@@ -1,27 +1,39 @@
 import { useState} from "react"
+import { useHistory } from "react-router"
 
 function LoginForm ({ onLogin }){
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
   	const [errors, setErrors] = useState([]);
+	const [showPassword, setShowPassword] = useState(false)
 
-	  function handleSubmit(e) {
-		    e.preventDefault();
-		    fetch("/login", {
-		      method: "POST",
-		      headers: {
-		        "Content-Type": "application/json",
-		      },
-		      body: JSON.stringify({ 
-						username,
-						password
-					}),
-		    })
-		      .then((r) => r.json())
-		      .then((data) => {
-		        if(data.errors) setErrors(data.errors)
-						else onLogin(data)
-					});  }
+	const history = useHistory()
+
+	function handleSubmit(e) {
+		e.preventDefault();
+		fetch("/login", {
+			method: "POST",
+			headers: {
+			"Content-Type": "application/json",
+			},
+			body: JSON.stringify({ 
+					username,
+					password
+			}),
+		})
+			.then((r) => r.json())
+			.then((data) => {
+			if(data.errors) 
+				setErrors(data.errors)
+			else 
+				onLogin(data)
+				history.push(`/dog_gif`)
+			}); 
+	}
+
+	function togglePassword(){
+		setShowPassword(!showPassword)
+	}
 
   return (
 		<div>
@@ -35,11 +47,16 @@ function LoginForm ({ onLogin }){
 				/>
         <div style={{ paddingTop: 10 }} />
 				<input
-					type="text"
+					type={showPassword ? "text" : "password"}
 					value={password}
 					placeholder={"password"}
 					onChange={(e) => setPassword(e.target.value)}
 				/>
+				<button 
+					onClick={togglePassword}
+					type="button">
+					Show Password
+				</button>
         <div style={{ paddingTop: 10 }} />
 				<button type="submit">Login</button>
 			</form>
