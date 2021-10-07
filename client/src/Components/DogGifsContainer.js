@@ -7,7 +7,6 @@ function DogGifsContainer({ dogGif, img, setDogID }) {
     const history = useHistory()
 
     function onClickFunction(){
-        // <Redirect to="/dog_gifs/" />
         history.push(`/dog_gif/${dogGif.id}`)
         setDogID(dogGif.id)
     }

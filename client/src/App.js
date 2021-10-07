@@ -6,6 +6,7 @@ import ShowOneDogGif from "./Components/ShowOneDogGif";
 import CommentsContainer from "./Components/CommentsContainer"
 import NewGifForm from './Components/NewGifForm'
 import Navbar from "./Components/Navbar"
+import SignupContainer from "./Components/SignupContainer";
 
 function App() {
 
@@ -81,7 +82,6 @@ function App() {
     <Fragment>
       <Navbar onLogout={onLogout} user={user} />
       {user && fetchingComments ? (
-        // <div className="main-div" >
             <Switch>
               <Route exact path = "/dog_gif/:id">
                 <>
@@ -95,12 +95,18 @@ function App() {
               <Route exact path ="/new">
                   <NewGifForm appOnAddDogGif={appOnAddDogGif}/>
               </Route>
-
           </Switch>
-        // </div>
       ) : (
-        <LoginContainer onLogin={onLogin} />
+        <Switch>
+          <Route exact path ="/">
+            <LoginContainer onLogin={onLogin} />
+          </Route>
+          <Route exact path = "/signup">
+            <SignupContainer onLogin={onLogin} />
+          </Route>
+        </Switch>
         )}
+
     </Fragment>
   );
 }

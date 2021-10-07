@@ -1,8 +1,8 @@
 import styled from "styled-components"
-import LoginForm from './LoginForm'
+import Signup from './Signup'
 
 
-function LoginContainer({ onLogin }) {
+function SignupContainer({ onLogin }) {
 
 	const Container = styled.div`
 		width: 100%;
@@ -16,22 +16,15 @@ function LoginContainer({ onLogin }) {
 
 	return (
 		<Container>    
-			<h2 class="ui image header">Log-in to your account</h2>
+			    <h2 class="ui image header">Sign Up For An Account </h2>
 				<div class="content">
-					<LoginForm onLogin={onLogin} />
+					<Signup onLogin={onLogin} />
 				</div>
-			<div class="ui message">
-				New to us? <a href="/signup">Sign Up</a>
-				
-			</div>
-
+                <div class="ui message">
+				Already have an account? <a href="/">Log In</a>
+			    </div>
 		</Container>
 	) 
 }
 
-export default LoginContainer
-
-
-
-
-
+export default SignupContainer

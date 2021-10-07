@@ -38,27 +38,42 @@ function LoginForm ({ onLogin }){
   return (
 		<div>
 			{errors?errors.map(e => <div style={{ color: "red" }} >{e}</div>):null}
-			<form onSubmit={handleSubmit} >
-				<input
-					type="text"
-					value={username}
-					placeholder={"username"}
-					onChange={(e) => setUsername(e.target.value)}
-				/>
-        <div style={{ paddingTop: 10 }} />
-				<input
-					type={showPassword ? "text" : "password"}
-					value={password}
-					placeholder={"password"}
-					onChange={(e) => setPassword(e.target.value)}
-				/>
-				<button 
-					onClick={togglePassword}
-					type="button">
-					Show Password
-				</button>
-        <div style={{ paddingTop: 10 }} />
-				<button type="submit">Login</button>
+			<form onSubmit={handleSubmit} class="ui large form">
+				<div class="ui stacked secondary  segment">
+					<div class="field">
+						<div class="ui left icon input">
+							<i class="user icon"></i>
+								<input
+									type="text"
+									value={username}
+									placeholder={"username"}
+									onChange={(e) => setUsername(e.target.value)}
+								/>
+						</div>
+					</div>
+					<div class="field">
+						<div class="ui left icon input">
+							<i class="lock icon"></i>
+								<input
+									type={showPassword ? "text" : "password"}
+									value={password}
+									placeholder={"password"}
+									onChange={(e) => setPassword(e.target.value)}
+								/>		
+								<button 
+									onClick={togglePassword}
+									type="button"
+									class="ui icon button">
+									<i class={showPassword ?  "eye icon" : "eye slash icon" }></i>
+								</button>			
+						</div>
+					</div>
+					<button class="ui fluid large teal submit button"
+						type="submit"
+					>
+						Login
+					</button>
+				</div>
 			</form>
 		</div>
   );
