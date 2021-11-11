@@ -21,10 +21,8 @@ function LoginContainer({ onLogin }) {
 					<LoginForm onLogin={onLogin} />
 				</div>
 			<div class="ui message">
-				New to us? <a href="/signup">Sign Up</a>
-				
+				Don't Have An Account? <a href="/signup">Sign Up</a>
 			</div>
-
 		</Container>
 	) 
 }

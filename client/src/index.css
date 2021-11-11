@@ -5,9 +5,26 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.p-container {
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
+  background-color: #F9F9F9;
+}
+
+img {
+  padding: 7px;
+}
+
+#root {
+  background-image: url(https://img2.pngio.com/free-white-paw-print-transparent-background-download-free-clip-paw-print-background-png-1873_1053.png);
+  
 }

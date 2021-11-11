@@ -27,7 +27,7 @@ function CommentDisplay({ comment, user, onDeleteComment, appOnEditComment, dogI
 		setRenderComment(data)
 	}
 
-	const msec = Date.parse(renderComment.created_at)
+  const msec = Date.parse(renderComment.created_at)
   const parseDate = new Date(msec).toDateString()
   const splitDate = parseDate.split(" ")
   const renderDate = `${splitDate[0]}, ${splitDate[1]} ${splitDate[2]}, ${splitDate[3]}`
@@ -43,6 +43,7 @@ function CommentDisplay({ comment, user, onDeleteComment, appOnEditComment, dogI
                 (<>
                   <p>{renderComment.comment}</p>
                   <div>
+                    
                     <em>{renderDate}</em>
                   </div>
                 </>
